@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neemias da Cruz Peres | Desenvolvedor Python & Full Stack</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --surface: #111827;
+      --surface-hover: #1f2937;
+      --border: #1e293b;
+      --primary: #3b82f6;
+      --primary-glow: rgba(59, 130, 246, 0.25);
+      --accent: #10b981;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    nav a {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .btn-print {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-print:hover {
+      border-color: var(--primary);
+      background: var(--surface-hover);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 2rem 0 3.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--accent);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 4vw, 3.1rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 0.75rem;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    .summary {
+      max-width: 760px;
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      padding: 0.75rem 1.4rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px var(--primary-glow);
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 600;
+      padding: 0.75rem 1.4rem;
+      border-radius: 8px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      background: var(--surface-hover);
+    }
+
+    /* Sections */
+    section {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    h2::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 22px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.35rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .skill-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.9rem;
+      color: var(--text);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: rgba(59, 130, 246, 0.12);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      font-size: 0.8rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    /* Highlights / Diferenciais */
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .highlight-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.35rem;
+    }
+
+    .highlight-item h4 {
+      color: var(--primary);
+      margin-bottom: 0.45rem;
+      font-size: 1rem;
+    }
+
+    .highlight-item p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    /* Certificate Card */
+    .cert-card {
+      background: linear-gradient(145deg, var(--surface), #131c31);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 12px;
+      padding: 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .cert-info h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .cert-meta {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .cert-code {
+      font-family: monospace;
+      font-size: 0.85rem;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      color: var(--accent);
+      display: inline-block;
+    }
+
+    /* Contact Section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .contact-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .contact-box span.label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+    }
+
+    .contact-box strong {
+      font-size: 1.1rem;
+      word-break: break-all;
+    }
+
+    .contact-actions {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .btn-small {
+      padding: 0.5rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface-hover);
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .btn-small:hover {
+      border-color: var(--primary);
+    }
+
+    .btn-whatsapp {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+    }
+
+    .btn-whatsapp:hover {
+      background: rgba(16, 185, 129, 0.25);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #fff;
+        color: #111;
+      }
+      header, .hero-actions, .contact-actions, footer {
+        display: none !important;
+      }
+      .skill-card, .highlight-item, .cert-card, .contact-box {
+        background: #fff;
+        border: 1px solid #ccc;
+        color: #111;
+        break-inside: avoid;
+      }
+      .summary, .cert-meta, .highlight-item p, .contact-box span.label {
+        color: #444;
+      }
+      .tag {
+        background: #f1f5f9;
+        color: #1e293b;
+        border-color: #cbd5e1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav a {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">Neemias<span>.dev</span></a>
+      <nav>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#competencias">Atuação</a>
+        <a href="#formacao">Certificação</a>
+        <a href="#contato">Contato</a>
+        <button class="btn-print" onclick="window.print()">Salvar PDF</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Disponível para oportunidades Remotas &bull; CLT ou PJ
+      </div>
+      <h1>Neemias da Cruz Peres</h1>
+      <p class="subtitle">Desenvolvedor Python | Full Stack &amp; Automação</p>
+      <p class="summary">
+        Desenvolvedor com sólida base em engenharia de software e especialização prática em <strong>Python (141,5h)</strong>, atuando no ciclo completo de desenvolvimento de aplicações web — desde a arquitetura e modelagem de bancos de dados relacionais (PostgreSQL/MySQL) até a criação de APIs REST, automações inteligentes, integrações de sistemas e interfaces front-end. Perfil autodidata, analítico e focado em entregar código limpo, seguro e bem documentado.
+      </p>
+      <div class="hero-actions">
+        <a href="#contato" class="btn-primary">Entrar em Contato</a>
+        <a href="#habilidades" class="btn-secondary">Ver Habilidades Técnicas</a>
+      </div>
+    </section>
+
+    <!-- Habilidades Técnicas -->
+    <section id="habilidades">
+      <h2>Habilidades Técnicas</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Back-End &amp; Python</h3>
+          <div class="tags">
+            <span class="tag">Python 3</span>
+            <span class="tag">Django</span>
+            <span class="tag">APIs REST</span>
+            <span class="tag">POO</span>
+            <span class="tag">Design Patterns (GoF)</span>
+            <span class="tag">TDD / Pytest</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Automação &amp; Dados</h3>
+          <div class="tags">
+            <span class="tag">Playwright</span>
+            <span class="tag">Selenium</span>
+            <span class="tag">Web Scraping</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">MySQL / SQLite</span>
+            <span class="tag">Modelagem SQL</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Front-End &amp; Web</h3>
+          <div class="tags">
+            <span class="tag">HTML5 &amp; CSS3</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">SEO Técnico</span>
+            <span class="tag">PyQt5</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Versionamento &amp; IA</h3>
+          <div class="tags">
+            <span class="tag">Git</span>
+            <span class="tag">GitHub (PRs &amp; Branches)</span>
+            <span class="tag">GitHub Copilot</span>
+            <span class="tag">Cursor / Claude Code</span>
+            <span class="tag">APIs de LLM</span>
+            <span class="tag">Linux / Deploy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diferenciais de Atuação -->
+    <section id="competencias">
+      <h2>Diferenciais &amp; Entrega</h2>
+      <div class="highlights">
+        <div class="highlight-item">
+          <h4>Automação e Integração de Processos</h4>
+          <p>Criação de robôs e scripts em Python para eliminar tarefas manuais, extrair dados e integrar plataformas externas via APIs e webhooks.</p>
+        </div>
+        <div class="highlight-item">
+          <h4>Desenvolvimento Acelerado com IA</h4>
+          <p>Uso estratégico e crítico de ferramentas de IA (Copilot, Cursor, Claude Code) com revisão rigorosa de segurança, arquitetura e qualidade de código.</p>
+        </div>
+        <div class="highlight-item">
+          <h4>Comunicação Clara &amp; Autonomia</h4>
+          <p>Facilidade para traduzir demandas de áreas não técnicas em soluções viáveis, com documentação organizada e fluxo colaborativo no GitHub.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificação -->
+    <section id="formacao">
+      <h2>Formação &amp; Certificação</h2>
+      <div class="cert-card">
+        <div class="cert-info">
+          <h3>Curso de Python 3 do Básico ao Avançado — Com Projetos Reais</h3>
+          <p class="cert-meta">Udemy &bull; Instrutores: Luiz Otávio Miranda e Tales Calogi Malaquias &bull; Carga horária: <strong>141,5 horas</strong></p>
+          <span class="cert-code">Certificado: UC-7cdc557d-28b0-458d-9b98-e306c54f6d57</span>
+        </div>
+        <a href="https://ude.my/UC-7cdc557d-28b0-458d-9b98-e306c54f6d57" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+          Validar Certificado &#8599;
+        </a>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato">
+      <h2>Contato</h2>
+      <div class="contact-grid">
+        <div class="contact-box">
+          <div>
+            <span class="label">Telefone / WhatsApp</span>
+            <p><strong>+55 (22) 99278-3627</strong></p>
+          </div>
+          <div class="contact-actions">
+            <a href="https://wa.me/5522992783627?text=Ol%C3%A1%20Neemias%2C%20vi%20seu%20curr%C3%ADculo%20e%20gostaria%20de%20conversar%20sobre%20uma%20oportunidade!" target="_blank" rel="noopener noreferrer" class="btn-small btn-whatsapp">
+              Chamar no WhatsApp
+            </a>
+            <a href="tel:+5522992783627" class="btn-small">Ligar</a>
+          </div>
+        </div>
+
+        <div class="contact-box">
+          <div>
+            <span class="label">E-mail Profissional</span>
+            <p><strong id="email-text">neemias123654@gmail.com</strong></p>
+          </div>
+          <div class="contact-actions">
+            <a href="mailto:neemias123654@gmail.com?subject=Oportunidade%20Desenvolvedor%20-%20Neemias%20Peres" class="btn-small">
+              Enviar E-mail
+            </a>
+            <button class="btn-small" id="copy-btn" onclick="copyEmail()">Copiar E-mail</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Neemias da Cruz Peres &bull; Desenvolvedor Python &amp; Full Stack</p>
+  </footer>
+
+  <script>
+    function copyEmail() {
+      const email = document.getElementById('email-text').innerText;
+      navigator.clipboard.writeText(email).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.innerText = 'Copiado!';
+        setTimeout(() => {
+          btn.innerText = 'Copiar E-mail';
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
